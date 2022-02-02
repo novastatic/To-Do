@@ -3,7 +3,7 @@
 # Erstellungsdatum: 2. Februar 2022
 
 from flask import Flask
-import requests
+#import requests
 
 # initialisiere Flask-Server
 app = Flask(__name__)
