@@ -126,12 +126,10 @@
         "parameters": [
           {
             "in": "path",
-            "name": "entry_id",
+            "name": "list_id",
             "description": "List object that needs to be added.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/TodoList"
-            }
+            "type":"string"
           },
           {
             "in": "body",
@@ -297,56 +295,56 @@
           }
         }
       }
+    }
+  },
+  "definitions": {
+    "TodoList": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
     },
-
-    "definitions": {
-      "TodoList": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": {
-            "type": "string"
-          }
+    "TodoEntry": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "list_id": {
+          "type": "string",
+          "format": "uuid"
         }
-      },
-      "TodoEntry": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "user_id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "list_id": {
-            "type": "string",
-            "format": "uuid"
-          }
-        }
-      },
-      "Users": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": {
-            "type": "string"
-          }
+      }
+    },
+    "Users": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
         }
       }
     }
   }
 }
+
