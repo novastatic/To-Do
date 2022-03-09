@@ -14,7 +14,7 @@ app = Flask(__name__)
 # create unique id for lists, users, entries
 user_id_bob = uuid.uuid4()
 user_id_alice = uuid.uuid4()
-user_id_eve = uuid.uuid4()
+user_id_antonia = uuid.uuid4()
 todo_list_1_id = '1318d3d1-d979-47e1-a225-dab1751dbe75'
 todo_list_2_id = '3062dc25-6b80-4315-bb1d-a7c86b014c65'
 todo_list_3_id = '44b02e00-03bc-451d-8d01-0c67ea866fee'
@@ -27,7 +27,7 @@ todo_4_id = uuid.uuid4()
 user_list = [
     {'id': user_id_bob, 'name': 'Bob'},
     {'id': user_id_alice, 'name': 'Alice'},
-    {'id': user_id_eve, 'name': 'Eve'},
+    {'id': user_id_antonia, 'name': 'Antonia'},
 ]
 todo_lists = [
     {'id': todo_list_1_id, 'name': 'Einkaufsliste'},
@@ -37,8 +37,8 @@ todo_lists = [
 todos = [
     {'id': todo_1_id, 'name': 'Milch', 'description': '', 'list': todo_list_1_id, 'user': user_id_bob},
     {'id': todo_2_id, 'name': 'Arbeitsblätter ausdrucken', 'description': '', 'list': todo_list_2_id, 'user': user_id_alice},
-    {'id': todo_3_id, 'name': 'Kinokarten kaufen', 'description': '', 'list': todo_list_3_id, 'user': user_id_eve},
-    {'id': todo_3_id, 'name': 'Eier', 'description': '', 'list': todo_list_1_id, 'user': user_id_eve},
+    {'id': todo_3_id, 'name': 'Kinokarten kaufen', 'description': '', 'list': todo_list_3_id, 'user': user_id_antonia},
+    {'id': todo_3_id, 'name': 'Eier', 'description': '', 'list': todo_list_1_id, 'user': user_id_antonia},
 ]
 
 # add some headers to allow cross origin access to the API on this server, necessary for using preview in Swagger Editor!
@@ -98,6 +98,10 @@ def addEntry():
     # add new entry + generate uuid
     new_entry = request.get_json(force=True)
     new_entry['id'] = uuid.uuid4()
+    new_entry['name'] = 'Finish the script'
+    new_entry['description'] = 'It is about time...'
+    new_entry['list'] = todo_list_2_id
+    new_entry['user'] = user_id_antonia
     todos.append(new_entry)
     print('New entry is being created...')
     # return on creation
@@ -143,7 +147,7 @@ def createUser():
     print('A new user is being created...')
     return jsonify(new_user), 200
 
-# definiere Route für das Löschen eines Benutzers
+# deine route for deleting a specified user
 @app.route('/user/<user_id>', methods=["DELETE"])
 def deleteUser(user_id):
     # check if user exists and delete or return 404
